@@ -4,13 +4,14 @@ using System.Linq;
 
 namespace JobInterview.Data.DataServices
 {
-    public class EmployeesDataService : IEmployeesDataService
+    internal class EmployeesDataService : IEmployeesDataService
     {
         private readonly EmployeeDbContext _employeeDbContext;
 
-        public EmployeesDataService(EmployeeDbContext employeeDbContext)
+        internal EmployeesDataService(EmployeeDbContext employeeDbContext)
         {
             _employeeDbContext = employeeDbContext;
+            _employeeDbContext.Database.EnsureCreated();
         }
 
         public IEnumerable<Employee> GetAllEmployees()

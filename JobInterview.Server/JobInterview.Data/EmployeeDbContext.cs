@@ -7,7 +7,7 @@ using System.Text.Json.Serialization;
 
 namespace JobInterview.Data
 {
-    public class EmployeeDbContext : DbContext
+    internal class EmployeeDbContext : DbContext
     {
         public EmployeeDbContext(DbContextOptions<EmployeeDbContext> options) : base(options)
         { }
