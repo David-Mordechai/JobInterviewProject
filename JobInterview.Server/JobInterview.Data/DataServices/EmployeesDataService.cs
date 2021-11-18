@@ -8,7 +8,7 @@ namespace JobInterview.Data.DataServices
     {
         private readonly EmployeeDbContext _employeeDbContext;
 
-        internal EmployeesDataService(EmployeeDbContext employeeDbContext)
+        public EmployeesDataService(EmployeeDbContext employeeDbContext)
         {
             _employeeDbContext = employeeDbContext;
             _employeeDbContext.Database.EnsureCreated();
