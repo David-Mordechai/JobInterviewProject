@@ -1,0 +1,47 @@
+<div class="wraper">
+    <mat-card>
+        <mat-card-title>Employees List</mat-card-title>
+    
+        <mat-form-field appearance="fill">
+            <mat-label>Department</mat-label>
+            <mat-select (selectionChange)="onDepartmentChange($event)">
+              <mat-option *ngFor="let department of departments" [value]="department.value">
+                {{department.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+    
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef> Id </th>
+                <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> Name </th>
+                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="age">
+                <th mat-header-cell *matHeaderCellDef> Age </th>
+                <td mat-cell *matCellDef="let element"> {{element.age}} </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="salary">
+                <th mat-header-cell *matHeaderCellDef> Salary </th>
+                <td mat-cell *matCellDef="let element"> {{element.salary}} </td>
+            </ng-container>
+    
+            <ng-container matColumnDef="department">
+                <th mat-header-cell *matHeaderCellDef> Department </th>
+                <td mat-cell *matCellDef="let element"> {{element.department}} </td>
+            </ng-container>
+    
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-progress-bar color="primary" mode="indeterminate" *ngIf="isLoading">
+        </mat-progress-bar>
+    </mat-card>
+</div>

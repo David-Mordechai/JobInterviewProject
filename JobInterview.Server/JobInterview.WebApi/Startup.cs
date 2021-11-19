@@ -22,6 +22,20 @@ namespace JobInterview.WebApi
         {
             services.AddDataLayerServicesCollection();
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy("EnableCORS", builder =>
+                {
+                    builder
+                      .WithOrigins(
+                        "http://localhost:4200", "https://localhost:4200")
+                      .AllowAnyHeader()
+                      .AllowAnyMethod()
+                      .AllowCredentials()
+                      .Build();
+                });
+            });
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -38,6 +52,8 @@ namespace JobInterview.WebApi
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "JobInterview.WebApi v1"));
             }
+
+            app.UseCors("EnableCORS");
 
             app.UseHttpsRedirection();
 

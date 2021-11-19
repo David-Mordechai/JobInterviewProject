@@ -1,0 +1,23 @@
+.wraper{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 0;
+}
+
+mat-card{
+    width: 80%;
+    
+}
+
+table.mat-table,
+table {
+  width: 100%;
+}
+
+
+.cardProgress{
+    display: flex; 
+    justify-content: center; 
+    align-items: center
+}

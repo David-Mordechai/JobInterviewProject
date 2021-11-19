@@ -1,5 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using JobInterview.Data;
+using JobInterview.Data.DataServices.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System.Collections.Generic;
 
 namespace JobInterview.WebApi.Controllers
 {
@@ -8,16 +11,21 @@ namespace JobInterview.WebApi.Controllers
     public class EmployeesController : ControllerBase
     {
         private readonly ILogger<EmployeesController> _logger;
+        private readonly IEmployeesDataService _employeesDataService;
 
-        public EmployeesController(ILogger<EmployeesController> logger)
+        public EmployeesController(
+            ILogger<EmployeesController> logger,
+            IEmployeesDataService employeesDataService)
         {
             _logger = logger;
+            _employeesDataService = employeesDataService;
         }
 
         [HttpGet]
-        public string Get()
+        public IEnumerable<Employee> Get()
         {
-            return "EmployeeController";
+            _logger.LogInformation("Get all employees method was called.");
+            return _employeesDataService.GetAllEmployees();
         }
     }
 }
