@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Departments } from '../models/departments';
 import { Employee } from '../models/employee';
@@ -9,7 +11,7 @@ import { EmployeesService } from '../services/employees.service';
   templateUrl: './empoloyees.component.html',
   styleUrls: ['./empoloyees.component.scss']
 })
-export class EmpoloyeesComponent implements OnInit {
+export class EmpoloyeesComponent implements OnInit, AfterViewInit  {
 
   dataSource = new MatTableDataSource<Employee>();
   displayedColumns: string[] = ['id', 'name', 'age', 'salary', 'department'];
@@ -17,7 +19,15 @@ export class EmpoloyeesComponent implements OnInit {
 
   departments: Departments[] = [];
 
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort)sort!: MatSort;
+
   constructor(private employeesService: EmployeesService) { }
+  
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
 
   ngOnInit(): void {
     this.getDepartments();
@@ -31,6 +41,12 @@ export class EmpoloyeesComponent implements OnInit {
     _error => { console.log("get departments api failed.")});
   }
 
+  onDepartmentChange(ob: any) {
+    console.log('Department changed...');
+    let selectedDepartment = ob.value;
+    console.log(selectedDepartment);
+  }
+
   getEmployees(){
     this.employeesService.getEmployees().subscribe((data) => {
       setTimeout(() => {
@@ -40,11 +56,5 @@ export class EmpoloyeesComponent implements OnInit {
     },
       _error => setTimeout(() => { this.isLoading = false; }, 300)
     );
-  }
-
-  onDepartmentChange(ob: any) {
-    console.log('Department changed...');
-    let selectedDepartment = ob.value;
-    console.log(selectedDepartment);
   }
 }

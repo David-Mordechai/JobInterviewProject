@@ -5,12 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EmpoloyeesComponent } from './empoloyees/empoloyees.component';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { MatCardModule } from '@angular/material/card';
 import { MatTableModule } from '@angular/material/table';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import {MatSelectModule} from '@angular/material/select';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import {MatSelectModule} from '@angular/material/select';
     MatCardModule,
     MatTableModule,
     MatProgressBarModule,
-    MatSelectModule
+    MatSelectModule,
+    MatPaginatorModule,
+    MatSortModule
   ],
   providers: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
