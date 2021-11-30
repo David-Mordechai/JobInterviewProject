@@ -7,7 +7,7 @@ using System.Collections.Generic;
 namespace JobInterview.WebApi.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("[controller]/[action]")]
     public class EmployeesController : ControllerBase
     {
         private readonly ILogger<EmployeesController> _logger;
@@ -22,7 +22,7 @@ namespace JobInterview.WebApi.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<Employee> Get()
+        public IEnumerable<Employee> GetEmployees()
         {
             _logger.LogInformation("Get all employees method was called.");
             return _employeesDataService.GetAllEmployees();
